@@ -13,16 +13,16 @@ import pickle
 # Both are based on Fibonacci numbers
 # Range of price changes ratio
 def label():
-    pkl_file = open("raw data\\AAPL.pkl","rb")
+    pkl_file = open("data\\AAPL.pkl","rb")
     data = pickle.load(pkl_file)
     pkl_file.close()
-    AAPL = data.ix['AAPL']['close'].tolist()
+    AAPL_CLOSE = data.ix['AAPL']['close'].tolist()
     label = []
     old = 0
-    for close in AAPL:
+    for close in AAPL_CLOSE:
         label.append((close-old)/close)
         old = close;
-    print (np.array(label).dtype)
+    print (len(np.array(label)))
     return np.array(label)
 
 if __name__ == '__main__':
