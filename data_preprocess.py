@@ -20,14 +20,9 @@ columns = ((1, 2), (3, 5), (6, 10), (11, 18), (19, 31),
            (32, 52), (53, 86), (87, 141), (142, 230)) * 2
 
 
-def preproc_data():
+def preproc_data(data):
     """Preprocess raw data into TP Matrix format"""
     # Load data manually from Yahoo! finance
-    start = datetime(2009, 1, 1, 0, 0, 0, 0, pytz.utc)
-    end = datetime(2016, 1, 1, 0, 0, 0, 0, pytz.utc)
-    data = load_bars_from_yahoo(stocks=['AAPL'],
-                                start=start,
-                                end=end)
 
     # Initialize TP Matrix
     # 3-dimension: # of stock * 18 * 18
@@ -58,10 +53,24 @@ def preproc_data():
 
     return TP_matrixs
 
+def label(data):
+    AAPL = data.ix['AAPL']['close'].tolist()
+    label = []
+    old = 0
+    for close in AAPL:
+        label.append((close-old)/close)
+        old = close;
+    return np.array(label)
 
 if __name__ == '__main__':
     # Preprocess raw data
-    TP_matrixs = preproc_data()
+
+    pkl_file = open("raw data\\AAPL.pkl","rb")
+    data = pickle.load(pkl_file)
+    pkl_file.close()
+
+    label = label(data)
+    TP_matrixs = preproc_data(data)
 
     # Store TP Matrix into pickle format
     output = open('TP_matrix.pkl', 'wb')
