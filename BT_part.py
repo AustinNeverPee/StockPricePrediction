@@ -21,6 +21,7 @@ from ML_part import cnn_model_fn
 import numpy as np
 from tensorflow.contrib import learn
 import os
+import pdb
 
 
 def initialize(context):
@@ -122,9 +123,14 @@ def analyze(context=None, results=None):
     mylogger.logger.info('Hit table:')
     mylogger.logger.info('Date          signal  hit/miss')
     for i in range(0, len(hit_table)):
-        mylogger.logger.info(str(hit_table.index[i])[0: 10] + '    ' +
-                             str(hit_table['signal'][i]) + '    ' +
-                             str(hit_table['hit/miss'][i]))
+        if str(hit_table['signal'][i]) == 'buy':
+            mylogger.logger.info(str(hit_table.index[i])[0: 10] + '    ' +
+                                 str(hit_table['signal'][i]) + '     ' +
+                                 str(hit_table['hit/miss'][i]))
+        else:
+            mylogger.logger.info(str(hit_table.index[i])[0: 10] + '    ' +
+                                 str(hit_table['signal'][i]) + '    ' +
+                                 str(hit_table['hit/miss'][i]))
     mylogger.logger.info('Hit number:' + str(hit_num) +
                          '/' + str(len(hit_record)))
     mylogger.logger.info('Hit rate:' + str(hit_rate))
@@ -204,7 +210,7 @@ if __name__ == '__main__':
     # Instantiate log
     mylogger = MyLogger()
     # Log directory
-    directory_log = str(datetime.now())[0:19]
+    directory_log = str(datetime.now())[0:19].replace(':', '-')
 
     # Create log directory
     os.makedirs('log/' + directory_log)
