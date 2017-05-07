@@ -19,9 +19,8 @@ from log import MyLogger
 import pickle
 from ML_part import cnn_model_fn
 import numpy as np
-import tensorflow as tf
 from tensorflow.contrib import learn
-from tensorflow.contrib.learn.python.learn.estimators import model_fn as model_fn_lib
+import os
 
 
 def initialize(context):
@@ -29,7 +28,7 @@ def initialize(context):
     context.security = symbol('AAPL')
 
     # Load TP matrix
-    pkl_file = open("data/TP_matrixs.pkl", "rb")
+    pkl_file = open("data/TP_matrix.pkl", "rb")
     context.TP_matrixs = pickle.load(pkl_file)
     pkl_file.close()
 
@@ -55,8 +54,9 @@ def handle_data(context, data):
     state = context.TP_matrixs.ix[now].values
 
     # Predict using the estimator
-    predictions = context.Q_estimator.predict(
-        x=state.astype(np.float32))
+    predictions = context.cnn_estimator.predict(
+        x=state.astype(np.float32),
+        as_iterable=False)
     ratio_predict = predictions["results"][0][0]
     mylogger.logger.info(ratio_predict)
 
@@ -205,6 +205,12 @@ if __name__ == '__main__':
     mylogger = MyLogger()
     # Log directory
     directory_log = str(datetime.now())[0:19]
+
+    # Create log directory
+    os.makedirs('log/' + directory_log)
+
+    # Add file handle to mylogger
+    mylogger.addFileHandler(directory_log)
 
     # Load data
     start_date = datetime(2014, 1, 1, 0, 0, 0, 0, pytz.utc)

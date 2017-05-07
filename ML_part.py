@@ -150,13 +150,6 @@ def main(unused_argv):
         eval_data[i] = data[i + l].tp_features
         eval_labels[i] = data[i + l].labels
 
-    # # Load training and eval data
-    # mnist = learn.datasets.load_dataset("mnist")
-    # train_data = mnist.train.images  # Returns np.array
-    # train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
-    # eval_data = mnist.test.images  # Returns np.array
-    # eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
-
     # Create the Estimator
     cnn_estimator = learn.Estimator(
         model_fn=cnn_model_fn,
