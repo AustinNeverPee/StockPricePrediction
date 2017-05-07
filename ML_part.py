@@ -10,6 +10,7 @@ from __future__ import print_function
 import pdb
 import numpy as np
 import tensorflow as tf
+import random
 
 from tensorflow.contrib import learn
 from tensorflow.contrib.learn.python.learn.estimators import model_fn as model_fn_lib
@@ -113,11 +114,28 @@ def cnn_model_fn(features, labels, mode):
 
 def main(unused_argv):
     # Load training and eval data
-    mnist = learn.datasets.load_dataset("mnist")
-    train_data = mnist.train.images  # Returns np.array
-    train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
-    eval_data = mnist.test.images  # Returns np.array
-    eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
+    pkl_file = open("DataSet.pkl","rb")
+    data = pickle.load(pkl_file)
+    pkl_file.close()
+
+    l = int(len(data)*0.7)
+    train_data = np.zeros((l, 18, 18), dtype=np.bool)
+    train_labels = np.zeros(l, dtype=np.float)
+    eval_data = np.zeros((len(data) - l, 18, 18), dtype=np.bool)
+    eval_labels = np.zeros((len(data) - l), dtype=np.float)
+
+    random.shuffle(data)
+    for i in range(l):
+        train_data[i] = data[i].tp_features
+        train_labels[i] = data[i].labels
+    for i in range(len(data) - l):
+        eval_data[i] = data[i+l].tp_features
+        eval_labels[i] = data[i+l].labels
+    # mnist = learn.datasets.load_dataset("mnist")
+    # train_data = mnist.train.images  # Returns np.array
+    # train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
+    # eval_data = mnist.test.images  # Returns np.array
+    # eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
 
     pdb.set_trace()
 
