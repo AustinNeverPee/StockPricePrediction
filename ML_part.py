@@ -7,11 +7,18 @@ import pdb
 import numpy as np
 import tensorflow as tf
 import random
+import pickle
 
 from tensorflow.contrib import learn
 from tensorflow.contrib.learn.python.learn.estimators import model_fn as model_fn_lib
 
 tf.logging.set_verbosity(tf.logging.INFO)
+
+
+class DataSet(object):
+    def __init__(self):
+        self.tp_features = []
+        self.labels = 1
 
 
 def cnn_model_fn(features, labels, mode):
@@ -92,8 +99,7 @@ def cnn_model_fn(features, labels, mode):
     # Output Tensor Shape: [batch_size, 1]
     logits = tf.layers.dense(
         inputs=dropout,
-        units=1,
-        name="logits")
+        units=1)
 
     loss = None
     train_op = None
@@ -111,7 +117,7 @@ def cnn_model_fn(features, labels, mode):
         train_op = tf.contrib.layers.optimize_loss(
             loss=loss,
             global_step=tf.contrib.framework.get_global_step(),
-            learning_rate=0.001,
+            learning_rate=0.0001,
             optimizer="Adam")
 
     # Generate Predictions
@@ -126,23 +132,24 @@ def cnn_model_fn(features, labels, mode):
 
 def main(unused_argv):
     # Load training and eval data
-    pkl_file = open("DataSet.pkl","rb")
+    pkl_file = open("DataSet.pkl", "rb")
     data = pickle.load(pkl_file)
     pkl_file.close()
 
-    l = int(len(data)*0.7)
-    train_data = np.zeros((l, 18, 18), dtype=np.bool)
-    train_labels = np.zeros(l, dtype=np.float)
-    eval_data = np.zeros((len(data) - l, 18, 18), dtype=np.bool)
-    eval_labels = np.zeros((len(data) - l), dtype=np.float)
+    l = int(len(data) * 0.7)
+    train_data = np.zeros((l, 18, 18), dtype=np.float32)
+    train_labels = np.zeros(l, dtype=np.float32)
+    eval_data = np.zeros((len(data) - l, 18, 18), dtype=np.float32)
+    eval_labels = np.zeros((len(data) - l), dtype=np.float32)
 
     random.shuffle(data)
     for i in range(l):
         train_data[i] = data[i].tp_features
         train_labels[i] = data[i].labels
     for i in range(len(data) - l):
-        eval_data[i] = data[i+l].tp_features
-        eval_labels[i] = data[i+l].labels
+        eval_data[i] = data[i + l].tp_features
+        eval_labels[i] = data[i + l].labels
+
     # # Load training and eval data
     # mnist = learn.datasets.load_dataset("mnist")
     # train_data = mnist.train.images  # Returns np.array
@@ -150,32 +157,56 @@ def main(unused_argv):
     # eval_data = mnist.test.images  # Returns np.array
     # eval_labels = np.asarray(mnist.test.labels, dtype=np.int32)
 
-    pdb.set_trace()
-
     # Create the Estimator
     cnn_estimator = learn.Estimator(
         model_fn=cnn_model_fn,
         model_dir="model/convnet_model")
 
-    # Set up logging for predictions
-    # Log the values in the "logits" tensor with label "change_ratio"
-    tensors_to_log = {"results": "logits"}
-    logging_hook = tf.train.LoggingTensorHook(
-        tensors=tensors_to_log, every_n_iter=50)
+    # # Set up logging for predictions
+    # # Log the values in the "logits" tensor with label "change_ratio"
+    # tensors_to_log = {
+    #     "predictions": "dense_2/BiasAdd:0",
+    #     "labels": "output:0"}
+    # logging_hook = tf.train.LoggingTensorHook(
+    #     tensors=tensors_to_log, every_n_iter=1000)
 
     # Train the model
     cnn_estimator.fit(
         x=train_data,
         y=train_labels,
         batch_size=100,
-        steps=20000,
-        monitors=[logging_hook])
+        steps=200)
 
     # Evaluate the model and print results
     eval_results = cnn_estimator.evaluate(
         x=eval_data,
         y=eval_labels)
     print(eval_results)
+
+    # Output data prediction
+    train_predictions = cnn_estimator.predict(
+        x=train_data,
+        as_iterable=False
+    )
+    eval_predictions = cnn_estimator.predict(
+        x=eval_data,
+        as_iterable=False
+    )
+
+    # Store prediction and labels into pickle format
+    # in convenience of further inspection
+    output = open('ML_results/train_labels.pkl', 'wb')
+    pickle.dump(train_labels, output)
+    output.close()
+    output = open('ML_results/eval_labels.pkl', 'wb')
+    pickle.dump(eval_labels, output)
+    output.close()
+    output = open('ML_results/train_predictions.pkl', 'wb')
+    pickle.dump(train_predictions, output)
+    output.close()
+    output = open('ML_results/eval_predictions.pkl', 'wb')
+    pickle.dump(eval_predictions, output)
+    output.close()
 
 
 if __name__ == "__main__":
