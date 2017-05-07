@@ -34,14 +34,14 @@ def label():
     plt.figure()
     plt.plot(train_truth)
     plt.plot(train_pre, 'g*')
-    plt.savefig("ML_results/train.pdf")
+    plt.savefig("ML_results/train.png")
     plt.show()
 
     plt.figure()
     plt.plot(test_truth)
     plt.plot(test_pre, 'g*')
+    plt.savefig("ML_results/test.png")
     plt.show()
-    plt.savefig("ML_results/test.pdf")
 
 
 if __name__ == '__main__':
