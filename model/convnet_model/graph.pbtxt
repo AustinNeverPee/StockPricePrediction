@@ -10203,8 +10203,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros"
+  name: "OptimizeLoss/conv2d/kernel/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -10330,7 +10338,7 @@ node {
   name: "OptimizeLoss/conv2d/kernel/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d/kernel/Adam"
-  input: "OptimizeLoss/zeros"
+  input: "OptimizeLoss/conv2d/kernel/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -10420,8 +10428,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_1"
+  name: "OptimizeLoss/conv2d/kernel/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -10547,7 +10563,7 @@ node {
   name: "OptimizeLoss/conv2d/kernel/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d/kernel/Adam_1"
-  input: "OptimizeLoss/zeros_1"
+  input: "OptimizeLoss/conv2d/kernel/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -10637,8 +10653,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_2"
+  name: "OptimizeLoss/conv2d/bias/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -10728,7 +10752,7 @@ node {
   name: "OptimizeLoss/conv2d/bias/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d/bias/Adam"
-  input: "OptimizeLoss/zeros_2"
+  input: "OptimizeLoss/conv2d/bias/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -10800,8 +10824,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_3"
+  name: "OptimizeLoss/conv2d/bias/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -10891,7 +10923,7 @@ node {
   name: "OptimizeLoss/conv2d/bias/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d/bias/Adam_1"
-  input: "OptimizeLoss/zeros_3"
+  input: "OptimizeLoss/conv2d/bias/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -10963,8 +10995,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_4"
+  name: "OptimizeLoss/conv2d_1/kernel/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d_1/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -11090,7 +11130,7 @@ node {
   name: "OptimizeLoss/conv2d_1/kernel/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d_1/kernel/Adam"
-  input: "OptimizeLoss/zeros_4"
+  input: "OptimizeLoss/conv2d_1/kernel/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -11180,8 +11220,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_5"
+  name: "OptimizeLoss/conv2d_1/kernel/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d_1/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -11307,7 +11355,7 @@ node {
   name: "OptimizeLoss/conv2d_1/kernel/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d_1/kernel/Adam_1"
-  input: "OptimizeLoss/zeros_5"
+  input: "OptimizeLoss/conv2d_1/kernel/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -11397,8 +11445,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_6"
+  name: "OptimizeLoss/conv2d_1/bias/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d_1/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -11488,7 +11544,7 @@ node {
   name: "OptimizeLoss/conv2d_1/bias/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d_1/bias/Adam"
-  input: "OptimizeLoss/zeros_6"
+  input: "OptimizeLoss/conv2d_1/bias/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -11560,8 +11616,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_7"
+  name: "OptimizeLoss/conv2d_1/bias/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv2d_1/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -11651,7 +11715,7 @@ node {
   name: "OptimizeLoss/conv2d_1/bias/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/conv2d_1/bias/Adam_1"
-  input: "OptimizeLoss/zeros_7"
+  input: "OptimizeLoss/conv2d_1/bias/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -11723,8 +11787,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_8"
+  name: "OptimizeLoss/dense/kernel/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -11826,7 +11898,7 @@ node {
   name: "OptimizeLoss/dense/kernel/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense/kernel/Adam"
-  input: "OptimizeLoss/zeros_8"
+  input: "OptimizeLoss/dense/kernel/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -11904,8 +11976,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_9"
+  name: "OptimizeLoss/dense/kernel/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12007,7 +12087,7 @@ node {
   name: "OptimizeLoss/dense/kernel/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense/kernel/Adam_1"
-  input: "OptimizeLoss/zeros_9"
+  input: "OptimizeLoss/dense/kernel/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12085,8 +12165,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_10"
+  name: "OptimizeLoss/dense/bias/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12176,7 +12264,7 @@ node {
   name: "OptimizeLoss/dense/bias/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense/bias/Adam"
-  input: "OptimizeLoss/zeros_10"
+  input: "OptimizeLoss/dense/bias/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12248,8 +12336,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_11"
+  name: "OptimizeLoss/dense/bias/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12339,7 +12435,7 @@ node {
   name: "OptimizeLoss/dense/bias/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense/bias/Adam_1"
-  input: "OptimizeLoss/zeros_11"
+  input: "OptimizeLoss/dense/bias/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12411,8 +12507,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_12"
+  name: "OptimizeLoss/dense_1/kernel/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12514,7 +12618,7 @@ node {
   name: "OptimizeLoss/dense_1/kernel/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense_1/kernel/Adam"
-  input: "OptimizeLoss/zeros_12"
+  input: "OptimizeLoss/dense_1/kernel/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12592,8 +12696,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_13"
+  name: "OptimizeLoss/dense_1/kernel/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/kernel"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12695,7 +12807,7 @@ node {
   name: "OptimizeLoss/dense_1/kernel/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense_1/kernel/Adam_1"
-  input: "OptimizeLoss/zeros_13"
+  input: "OptimizeLoss/dense_1/kernel/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12773,8 +12885,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_14"
+  name: "OptimizeLoss/dense_1/bias/Adam/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -12864,7 +12984,7 @@ node {
   name: "OptimizeLoss/dense_1/bias/Adam/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense_1/bias/Adam"
-  input: "OptimizeLoss/zeros_14"
+  input: "OptimizeLoss/dense_1/bias/Adam/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -12936,8 +13056,16 @@ node {
   }
 }
 node {
-  name: "OptimizeLoss/zeros_15"
+  name: "OptimizeLoss/dense_1/bias/Adam_1/Initializer/Const"
   op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/bias"
+      }
+    }
+  }
   attr {
     key: "_output_shapes"
     value {
@@ -13027,7 +13155,7 @@ node {
   name: "OptimizeLoss/dense_1/bias/Adam_1/Assign"
   op: "Assign"
   input: "OptimizeLoss/dense_1/bias/Adam_1"
-  input: "OptimizeLoss/zeros_15"
+  input: "OptimizeLoss/dense_1/bias/Adam_1/Initializer/Const"
   attr {
     key: "T"
     value {
@@ -17466,7 +17594,7 @@ node {
         dtype: DT_STRING
         tensor_shape {
         }
-        string_val: "_temp_c613562ac8f94525a91d24ce32005e80/part"
+        string_val: "_temp_49e2d33c2b3c41b0a7a9b965f7d6ae5e/part"
       }
     }
   }
