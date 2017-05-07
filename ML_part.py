@@ -175,7 +175,7 @@ def main(unused_argv):
         x=train_data,
         y=train_labels,
         batch_size=100,
-        steps=200)
+        steps=20000)
 
     # Evaluate the model and print results
     eval_results = cnn_estimator.evaluate(
