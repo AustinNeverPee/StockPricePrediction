@@ -133,7 +133,8 @@ def main(unused_argv):
 
     # Create the Estimator
     cnn_estimator = learn.Estimator(
-        model_fn=cnn_model_fn, model_dir="model/convnet_model")
+        model_fn=cnn_model_fn,
+        model_dir="model/convnet_model")
 
     # Set up logging for predictions
     # Log the values in the "logits" tensor with label "change_ratio"
