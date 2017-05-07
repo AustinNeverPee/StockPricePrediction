@@ -12,7 +12,8 @@ from zipline.api import (
     record,
     symbol,
     get_datetime,
-    set_long_only)
+    set_long_only,
+    history)
 import matplotlib.pyplot as plt
 import pandas as pd
 from log import MyLogger
@@ -42,12 +43,18 @@ def initialize(context):
     context.threshold_up = 0
     context.threshold_down = 0
 
-    # Algorithm will only take long positions.
-    # It will stop if encounters a short position.
-    set_long_only()
-
 
 def handle_data(context, data):
+    # # Bad news flag
+    # flag_bad = False
+    # try:
+    #     # Get history data()
+    #     data_hist = data.history(context.security, 'price', 5, '1d')
+    #     if data_hist[0] > data_hist[1] and data_hist[1] > data_hist[2] and data_hist[2] > data_hist[3] and data_hist[3] > data_hist[4]:
+    #         flag_bad = True
+    # except Exception as e:
+    #     pass
+
     # Get current date
     now = str(get_datetime('US/Eastern'))[0:11] + "00:00:00+0000"
 
@@ -66,12 +73,18 @@ def handle_data(context, data):
     if ratio_predict < context.threshold_down:
         # Sell
         # No short
-        try:
-            order(context.security, 100)
+        if context.portfolio.positions[context.security].amount >= 100:
+            order(context.security, -100)
             mylogger.logger.info(now + ': sell')
-        except Exception as e:
+            action = "sell"
+        elif context.portfolio.positions[context.security].amount == 0:
             mylogger.logger.info(now + ': No short!')
-        action = "sell"
+            action = "hold"
+        else:
+            order(context.security,
+                  -context.portfolio.positions[context.security].amount)
+            mylogger.logger.info(now + ': sell')
+            action = "sell"
     elif ratio_predict > context.threshold_up:
         # Buy
         # No cover
@@ -79,9 +92,10 @@ def handle_data(context, data):
             order(context.security, 100)
             mylogger.logger.info(now + ': buy')
             mylogger.logger.info(context.portfolio.cash)
+            action = "buy"
         else:
             mylogger.logger.info(now + ': No cover!')
-        action = "buy"
+            action = "hold"
     else:
         # Hold
         mylogger.logger.info(now + ': hold')
