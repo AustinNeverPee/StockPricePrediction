@@ -30,20 +30,19 @@ def preproc_data(data):
     # Initialize TP Matrix
     # 3-dimension: # of stock * 18 * 18
     # narray
-    _TP_matrixs = np.zeros((len(data.ix['AAPL']) - 230, 18, 18), dtype=np.bool)
-    old = data.ix['AAPL']['close'][229]
-    TP_matrixs = pd.Panel(_TP_matrixs, items=data.ix['AAPL'].index[230:])
+    _TP_matrixs = np.zeros((len(data.ix['AAPL']) - 230 - 1, 18, 18), dtype=np.bool)
+    old = data.ix['AAPL']['close'][230]
+    TP_matrixs = pd.Panel(_TP_matrixs, items=data.ix['AAPL'].index[230:-1])
     label = np.zeros((len(data.ix['AAPL']) - 230),dtype=np.float)
-    dataindex = 230
+    dataindex = 0
     # Construct TP Matrix
     for TP_matrix in TP_matrixs.iteritems():
         # Extract raw close price of last 230 days
         _list_CP = data.ix['AAPL'][data.ix['AAPL'].index < TP_matrix[0]]['close'].tolist()
         list_CP = _list_CP[len(_list_CP) - 230: len(_list_CP)]
-        close = data.ix['AAPL']['close'][dataindex]
-        label[dataindex-230] = (close-old)/close
+        close = data.ix['AAPL']['close'][dataindex+231]
+        label[dataindex] = (close-old)/old
         old = close
-        dataindex += 1
         # col[0, 8] for Upward TP Matrix
         # col[9, 17] for Downward TP Matrix
         for col in range(0, 18):
@@ -56,8 +55,9 @@ def preproc_data(data):
                     C_TPD = (list_CP[TP] - list_CP[D]) / list_CP[D]
                     if C_TPD * 100 >= rows[row][0] and C_TPD * 100 < rows[row][1]:
                         TP_matrix[1][row][col] = True  
-                        _TP_matrixs[dataindex - 231][row][col] = True
+                        _TP_matrixs[dataindex][row][col] = True
                         break
+        dataindex += 1
     dataset = DataSet()
     dataset.tf = _TP_matrixs
     dataset.labels = label
