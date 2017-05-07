@@ -46,5 +46,5 @@ On the morning of each trading day, we use the model to predict.
 
 HAN, Siyuan / [@SiYuanHan](https://github.com/SiYuanHan)  
 LI, Jianda / [@jiandaLi](https://github.com/jiandaLi)  
-HU, Xiaoyu / [@HuXiaoyu1994](https://github.com/HuXiaoyu1994)__
+HU, Xiaoyu / [@HuXiaoyu1994](https://github.com/HuXiaoyu1994)  
 YANG, Austin Liu / [@AustinNeverPee](https://github.com/AustinNeverPee)
