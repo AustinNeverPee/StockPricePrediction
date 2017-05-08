@@ -142,7 +142,7 @@ def main(unused_argv):
     eval_data = np.zeros((len(data) - l, 18, 18), dtype=np.float32)
     eval_labels = np.zeros((len(data) - l), dtype=np.float32)
 
-    random.shuffle(data)
+    # random.shuffle(data)
     for i in range(l):
         train_data[i] = data[i].tp_features
         train_labels[i] = data[i].labels
@@ -168,7 +168,7 @@ def main(unused_argv):
         x=train_data,
         y=train_labels,
         batch_size=100,
-        steps=10000)
+        steps=2000)
 
     # Evaluate the model and print results
     eval_results = cnn_estimator.evaluate(

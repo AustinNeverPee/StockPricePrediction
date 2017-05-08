@@ -8,7 +8,8 @@ from datetime import datetime
 from zipline.algorithm import TradingAlgorithm
 from zipline.utils.factory import load_bars_from_yahoo
 from zipline.api import (
-    order,
+    order_percent,
+    order_target_percent,
     record,
     symbol,
     get_datetime,
@@ -40,7 +41,7 @@ def initialize(context):
         model_dir="model/convnet_model")
 
     # Threshold for stock price change ratio
-    context.threshold_up = 0
+    context.threshold_up = 0.005
     context.threshold_down = 0
 
 
@@ -73,23 +74,18 @@ def handle_data(context, data):
     if ratio_predict < context.threshold_down:
         # Sell
         # No short
-        if context.portfolio.positions[context.security].amount >= 100:
-            order(context.security, -100)
+        if context.portfolio.positions[context.security].amount > 0:
+            order_target_percent(context.security, 0)
             mylogger.logger.info(now + ': sell')
             action = "sell"
         elif context.portfolio.positions[context.security].amount == 0:
             mylogger.logger.info(now + ': No short!')
             action = "hold"
-        else:
-            order(context.security,
-                  -context.portfolio.positions[context.security].amount)
-            mylogger.logger.info(now + ': sell')
-            action = "sell"
     elif ratio_predict > context.threshold_up:
         # Buy
         # No cover
-        if context.portfolio.cash >= data.current(context.security, 'price') * 100:
-            order(context.security, 100)
+        if context.portfolio.cash > 0:
+            order_percent(context.security, 1)
             mylogger.logger.info(now + ': buy')
             mylogger.logger.info(context.portfolio.cash)
             action = "buy"
