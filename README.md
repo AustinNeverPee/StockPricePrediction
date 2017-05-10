@@ -49,9 +49,9 @@ Three models are trained for three different stocks. The machine learning result
 
 Apple Inc. (AAPL)  
 
-- Machine learning result for both train set(left) and test set(right); Blue lines stand for ground truth and green stars for predictions.  
-<img src="illustration/APPL_result_ML_train.png" width="40%" height="40%" float=left>
-<img src="illustration/APPL_result_ML_test.png" width="40%" height="40%" float=right>
+- Machine learning result for both train set and test set; Blue lines stand for ground truth and green stars for predictions.  
+<img src="illustration/APPL_result_ML_train.png" width="40%" height="50%">
+<img src="illustration/APPL_result_ML_test.png" width="40%" height="50%">
 
 - Backtesting results  
 <img src="illustration/APPL_result_BT.png" width="80%" height="80%">
@@ -59,9 +59,9 @@ Apple Inc. (AAPL)
 
 General Electric Company (GE)  
 
-- Machine learning result for both train set(left) and test set(right).  
-<img src="illustration/GE_result_ML_train.png" width="40%" height="40%">
-<img src="illustration/GE_result_ML_test.png" width="40%" height="40%">
+- Machine learning result for both train set and test set.  
+<img src="illustration/GE_result_ML_train.png" width="40%" height="50%">
+<img src="illustration/GE_result_ML_test.png" width="40%" height="50%">
 
 - Backtesting results  
 <img src="illustration/GE_result_BT.png" width="80%" height="80%">
@@ -69,9 +69,9 @@ General Electric Company (GE)
 
 The Boeing Company (BA)  
 
-- Machine learning result for both train set(left) and test set(right).  
-<img src="illustration/BA_result_ML_train.png" width="40%" height="40%">
-<img src="illustration/BA_result_ML_test.png" width="40%" height="40%">
+- Machine learning result for both train set and test set.  
+<img src="illustration/BA_result_ML_train.png" width="40%" height="50%">
+<img src="illustration/BA_result_ML_test.png" width="40%" height="50%">
 
 - Backtesting results  
 <img src="illustration/BA_result_BT.png" width="80%" height="80%">
@@ -87,10 +87,16 @@ Till now, this project is just a demo built for course. And we've listed some ne
 - Use data mining to find the threshold of trading
     - Threshold for buying
     - Threshold for selling
-- Try classification methods on this problem
-    - Predict “rise” or “fall” of stock price
+- Keep modifying model parameters
+    - The depth of networks
+    - The number of neurons of each layers
+    - Learning rate
+    - ...
 - Try more models
     - RNN and LSTM are both good at sovling time series problems.
+- Try classification methods on this problem
+    - Predict “rise” or “fall” of stock price
+
 
 
 ## Author
