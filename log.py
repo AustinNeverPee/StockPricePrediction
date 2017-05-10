@@ -22,7 +22,7 @@ class MyLogger:
 
     def addFileHandler(self, directory_log):
         # File log
-        filename = 'log/' + directory_log + '/log' + directory_log + '.log'
+        filename = 'log/BA/' + directory_log + '/log' + directory_log + '.log'
         fh = logging.FileHandler(filename)
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.formatter_fh)

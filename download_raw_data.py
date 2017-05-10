@@ -10,16 +10,14 @@ import pickle
 import pdb
 
 # Load data manually from Yahoo! finance
-start = datetime(2010, 1, 1, 0, 0, 0, 0, pytz.utc)
+start = datetime(2009, 1, 1, 0, 0, 0, 0, pytz.utc)
 end = datetime(2016, 1, 1, 0, 0, 0, 0, pytz.utc)
-data = load_bars_from_yahoo(stocks=['AAPL'],
+data = load_bars_from_yahoo(stocks=['GE'],
                             start=start,
                             end=end)
 
-pdb.set_trace()
-
 # Store raw data into pickle format
-output = open('raw data/AAPL.pkl', 'wb')
+output = open('data/GE.pkl', 'wb')
 # Pickle dictionary using protocol 0.
 pickle.dump(data, output)
 output.close()

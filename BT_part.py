@@ -28,20 +28,20 @@ import pdb
 
 def initialize(context):
     # AAPL
-    context.security = symbol('AAPL')
+    context.security = symbol(stock_name)
 
     # Load TP matrix
-    pkl_file = open("data/TP_matrix.pkl", "rb")
+    pkl_file = open("data/TP_matrix_" + stock_name + ".pkl", "rb")
     context.TP_matrixs = pickle.load(pkl_file)
     pkl_file.close()
 
     # Load trained model
     context.cnn_estimator = learn.Estimator(
         model_fn=cnn_model_fn,
-        model_dir="model/convnet_model")
+        model_dir="model/" + stock_name + "/convnet_model")
 
     # Threshold for stock price change ratio
-    context.threshold_up = 0.005
+    context.threshold_up = 0.02
     context.threshold_down = 0
 
 
@@ -169,7 +169,7 @@ def analyze(context=None, results=None):
             stock_value[day] *= share_number
     stock_value.plot(ax=ax1,
                      color='k',
-                     label='APPL')
+                     label=stock_name)
     plt.legend(loc='upper left')
 
     # Subplot 2
@@ -178,7 +178,7 @@ def analyze(context=None, results=None):
     ax2.set_ylabel('Action Marks')
     results['AAPL'].plot(ax=ax2,
                          color='k',
-                         label='AAPL Price')
+                         label=stock_name + ' Price')
     actions_sell = results['actions'].ix[[
         action == 'sell' for action in results['actions']]]
     actions_buy = results['actions'].ix[[
@@ -209,7 +209,8 @@ def analyze(context=None, results=None):
     plt.legend(loc='upper left')
 
     # Save figure into file
-    fig_name = 'log/' + directory_log + '/fig' + directory_log + '.png'
+    fig_name = 'log/' + stock_name + '/' + \
+        directory_log + '/fig' + directory_log + '.png'
     plt.savefig(fig_name)
 
     # Show figure on the screen
@@ -217,13 +218,16 @@ def analyze(context=None, results=None):
 
 
 if __name__ == '__main__':
+    # Sotck name
+    stock_name = "BA"
+
     # Instantiate log
     mylogger = MyLogger()
     # Log directory
     directory_log = str(datetime.now())[0:19].replace(':', '-')
 
     # Create log directory
-    os.makedirs('log/' + directory_log)
+    os.makedirs('log/' + stock_name + '/' + directory_log)
 
     # Add file handle to mylogger
     mylogger.addFileHandler(directory_log)
@@ -231,7 +235,7 @@ if __name__ == '__main__':
     # Load data
     start_date = datetime(2014, 1, 1, 0, 0, 0, 0, pytz.utc)
     end_date = datetime(2016, 1, 1, 0, 0, 0, 0, pytz.utc)
-    data = load_bars_from_yahoo(stocks=['AAPL'],
+    data = load_bars_from_yahoo(stocks=[stock_name],
                                 start=start_date,
                                 end=end_date)
 

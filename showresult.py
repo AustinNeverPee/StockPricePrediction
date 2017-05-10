@@ -15,35 +15,38 @@ import matplotlib.pyplot as plt
 
 
 def label():
-    pkl_file = open("ML_results/eval_labels.pkl", "rb")
+    pkl_file = open("ML_result/" + stock_name + "/eval_labels.pkl", "rb")
     test_truth = pickle.load(pkl_file).tolist()
     pkl_file.close()
 
-    pkl_file = open("ML_results/train_labels.pkl", "rb")
+    pkl_file = open("ML_result/" + stock_name + "/train_labels.pkl", "rb")
     train_truth = pickle.load(pkl_file).tolist()
     pkl_file.close()
 
-    pkl_file = open("ML_results/eval_predictions.pkl", "rb")
+    pkl_file = open("ML_result/" + stock_name + "/eval_predictions.pkl", "rb")
     test_pre = pickle.load(pkl_file)['results'].tolist()
     pkl_file.close()
 
-    pkl_file = open("ML_results/train_predictions.pkl", "rb")
+    pkl_file = open("ML_result/" + stock_name + "/train_predictions.pkl", "rb")
     train_pre = pickle.load(pkl_file)['results'].tolist()
     pkl_file.close()
 
     plt.figure()
     plt.plot(train_truth)
     plt.plot(train_pre, 'g*')
-    plt.savefig("ML_results/train.png")
+    plt.savefig("ML_result/" + stock_name + "/train.png")
     plt.show()
 
     plt.figure()
     plt.plot(test_truth)
     plt.plot(test_pre, 'g*')
-    plt.savefig("ML_results/test.png")
+    plt.savefig("ML_result/" + stock_name + "/test.png")
     plt.show()
 
 
 if __name__ == '__main__':
+    # Sotck name
+    stock_name = "BA"
+
     label()
     # Preprocess raw data

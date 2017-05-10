@@ -132,7 +132,7 @@ def cnn_model_fn(features, labels, mode):
 
 def main(unused_argv):
     # Load training and eval data
-    pkl_file = open("DataSet.pkl", "rb")
+    pkl_file = open("data/data_set_" + stock_name + ".pkl", "rb")
     data = pickle.load(pkl_file)
     pkl_file.close()
 
@@ -153,7 +153,7 @@ def main(unused_argv):
     # Create the Estimator
     cnn_estimator = learn.Estimator(
         model_fn=cnn_model_fn,
-        model_dir="model/convnet_model")
+        model_dir="model/" + stock_name + "/convnet_model")
 
     # # Set up logging for predictions
     # # Log the values in the "logits" tensor with label "change_ratio"
@@ -168,7 +168,7 @@ def main(unused_argv):
         x=train_data,
         y=train_labels,
         batch_size=100,
-        steps=2000)
+        steps=4000)
 
     # Evaluate the model and print results
     eval_results = cnn_estimator.evaluate(
@@ -188,19 +188,22 @@ def main(unused_argv):
 
     # Store prediction and labels into pickle format
     # in convenience of further inspection
-    output = open('ML_results/train_labels.pkl', 'wb')
+    output = open('ML_result/' + stock_name + '/train_labels.pkl', 'wb')
     pickle.dump(train_labels, output)
     output.close()
-    output = open('ML_results/eval_labels.pkl', 'wb')
+    output = open('ML_result/' + stock_name + '/eval_labels.pkl', 'wb')
     pickle.dump(eval_labels, output)
     output.close()
-    output = open('ML_results/train_predictions.pkl', 'wb')
+    output = open('ML_result/' + stock_name + '/train_predictions.pkl', 'wb')
     pickle.dump(train_predictions, output)
     output.close()
-    output = open('ML_results/eval_predictions.pkl', 'wb')
+    output = open('ML_result/' + stock_name + '/eval_predictions.pkl', 'wb')
     pickle.dump(eval_predictions, output)
     output.close()
 
 
 if __name__ == "__main__":
+    # Sotck name
+    stock_name = "BA"
+
     tf.app.run()

@@ -3,7 +3,7 @@
 A machine learning project that predicts sotck price in the future.  
 It's a course project of CSIT 600D Introduction to Big Data, HKUST, 2017.
 
-<img src="stock_prices.png" width="80%" height="80%">
+<img src="illustration/stock_prices.png" width="80%" height="80%">
 
 
 ## Prerequisites
@@ -20,13 +20,13 @@ In brief, this a regression problem(supervised learning) in machine learing.
 
 Raw data is preprocessed as TP Matrix format.
 
-<img src="TP_matrix.png" width="50%" height="50%">
+<img src="illustration/TP_matrix.png" width="50%" height="50%">
 
 ### Model
 
 Convolutional Neural Networks is used to fit the labeled data.
 
-<img src="CNNs.png" width="80%" height="80%">
+<img src="illustration/CNNs.png" width="80%" height="80%">
 
 ### Output
 
