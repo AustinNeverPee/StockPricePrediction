@@ -21,7 +21,7 @@ In brief, this a regression problem(supervised learning) in machine learing.
 Raw data is preprocessed as TP Matrix format.
 
 <img src="illustration/TP_matrix.png" width="50%" height="50%">
-
+    
 ### Model
 
 Convolutional Neural Networks is used to fit the labeled data.
@@ -40,6 +40,57 @@ On the morning of each trading day, we use the model to predict.
 - If the output is large enough(positive), we buy an amount of stock.
 - If the ouput is small enough(negative), we sell an amount of stock.
 - Otherwise, we just take the "hold" action.
+
+
+## Results
+
+Three models are trained for three different stocks. The machine learning results and backtesting results are shown below:  
+
+
+Apple Inc. (AAPL)  
+
+- Machine learning result for both train set(left) and test set(right); Blue lines stand for ground truth and green stars for predictions.  
+<img src="illustration/APPL_result_ML_train.png" width="40%" height="40%">
+<img src="illustration/APPL_result_ML_test.png" width="40%" height="40%">
+
+- Backtesting results  
+<img src="illustration/APPL_result_BT.png" width="80%" height="80%">
+
+
+General Electric Company (GE)  
+
+- Machine learning result for both train set(left) and test set(right).  
+<img src="illustration/GE_result_ML_train.png" width="40%" height="40%">
+<img src="illustration/GE_result_ML_test.png" width="40%" height="40%">
+
+- Backtesting results  
+<img src="illustration/GE_result_BT.png" width="80%" height="80%">
+
+
+The Boeing Company (BA)  
+
+- Machine learning result for both train set(left) and test set(right).  
+<img src="illustration/BA_result_ML_train.png" width="40%" height="40%">
+<img src="illustration/BA_result_ML_test.png" width="40%" height="40%">
+
+- Backtesting results  
+<img src="illustration/BA_result_BT.png" width="80%" height="80%">
+
+As we can see, backtesting works fine on the first two stocks but doesn't on the third one.
+
+## Future work
+
+Till now, this project is just a demo built for course. And we've listed some needed improvements:
+
+- Try different kinds of inputs
+    - Involve more information besides raw stock price
+- Use data mining to find the threshold of trading
+    - Threshold for buying
+    - Threshold for selling
+- Try classification methods on this problem
+    - Predict “rise” or “fall” of stock price
+- Try more models
+    - RNN and LSTM are both good at sovling time series problems.
 
 
 ## Author
