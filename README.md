@@ -50,8 +50,8 @@ Three models are trained for three different stocks. The machine learning result
 Apple Inc. (AAPL)  
 
 - Machine learning result for both train set(left) and test set(right); Blue lines stand for ground truth and green stars for predictions.  
-<img src="illustration/APPL_result_ML_train.png" width="40%" height="40%">
-<img src="illustration/APPL_result_ML_test.png" width="40%" height="40%">
+<img src="illustration/APPL_result_ML_train.png" width="40%" height="40%" float=left>
+<img src="illustration/APPL_result_ML_test.png" width="40%" height="40%" float=right>
 
 - Backtesting results  
 <img src="illustration/APPL_result_BT.png" width="80%" height="80%">
